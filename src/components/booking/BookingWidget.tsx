@@ -55,14 +55,14 @@ export default function BookingWidget() {
   return (
     <div
       id="booking-widget"
-      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:left-auto lg:right-8 lg:transform-none w-11/12 max-w-[12rem] lg:w-85 rounded-3xl 2xl:rounded-[4rem] z-40 overflow-hidden transition-all duration-300 shadow-2xl booking-glass [@media(min-width:2560px)]:max-w-[33rem] ${
+      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:left-auto lg:right-8 lg:transform-none w-11/12 max-w-[12rem] lg:w-85 rounded-3xl 2xl:rounded-[4rem] z-40 overflow-hidden transition-all duration-300 shadow-2xl booking-glass 3xl:max-w-[33rem] ${
         isCollapsed ? "" : "max-w-[24rem]"
       }`}
     >
       {/* Header - Always Visible */}
       <div
         id="booking-header"
-        className="p-2 flex items-center justify-between relative booking-content-glass min-h-16 2xl:min-h-4xl cursor-pointer [@media(min-width:2560px)]:p-[1.5rem] [@media(min-width:2560px)]:min-h-[11rem]"
+        className="p-2 flex items-center justify-between relative booking-content-glass min-h-16 2xl:min-h-4xl cursor-pointer 3xl:p-[1.5rem] 3xl:min-h-[11rem]"
       >
         <a
           href={BOOKING_URL}
@@ -75,7 +75,7 @@ export default function BookingWidget() {
             <img
               src="/images/BookNow3.png"
               alt="Book Now"
-              className="icon-img w-[59px] h-[59px] [@media(min-width:2560px)]:w-[155px] [@media(min-width:2560px)]:h-[155px]"
+              className="icon-img w-[59px] h-[59px] 3xl:w-[155px] 3xl:h-[155px]"
             />
           </div>
           <div>

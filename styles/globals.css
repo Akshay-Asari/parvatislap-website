@@ -1,6 +1,14 @@
-﻿@tailwind base;
-@tailwind components;
-@tailwind utilities;
+﻿@import "tailwindcss";
+
+/* ======================================
+   TAILWIND V4 CUSTOM CONFIGURATION
+   Using @theme directive for custom breakpoints
+   ====================================== */
+
+@theme {
+  /* Custom breakpoint for ultra-wide screens (2560px+) */
+  --breakpoint-3xl: 2560px;
+}
 
 /* ======================================
    LEGACY CSS FROM ORIGINAL HTML

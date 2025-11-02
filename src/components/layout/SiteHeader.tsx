@@ -60,12 +60,12 @@ export function SiteHeader() {
               <img
                 src="/images/logo-updated.png"
                 alt="Parvati's Lap Logo"
-                className="w-[69px] h-[37px] mr-3 [@media(min-width:2560px)]:w-[240px] [@media(min-width:2560px)]:h-[120px]"
+                className="w-[69px] h-[37px] mr-3 3xl:w-[240px] 3xl:h-[120px]"
               />
               <img
                 src="/images/logo-text.png"
                 alt="PARVATI'S LAP"
-                className="h-[169px] w-auto [@media(min-width:2560px)]:h-[373px] [@media(min-width:2560px)]:ml-[15px]"
+                className="h-[169px] w-auto 3xl:h-[373px] 3xl:ml-[15px]"
               />
             </a>
           </div>
@@ -135,10 +135,10 @@ export function SiteHeader() {
                 WebkitBackdropFilter: 'blur(10px)',
               }}
             >
-              <span className="text-lg leading-none [@media(min-width:2560px)]:text-[30px]">
+              <span className="text-lg leading-none 3xl:text-[30px]">
                 {themeIcon}
               </span>
-              <span className="text-sm font-medium tracking-wide leading-none [@media(min-width:2560px)]:text-[30px]">
+              <span className="text-sm font-medium tracking-wide leading-none 3xl:text-[30px]">
                 {themeLabel}
               </span>
             </button>
