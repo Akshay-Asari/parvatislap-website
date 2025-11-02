@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useMobileMenu } from "@/hooks/useMobileMenu";
 
 /**
  * SiteHeader Component
@@ -10,42 +10,12 @@ import { useTheme } from "@/contexts/ThemeContext";
  */
 export function SiteHeader() {
   const { theme, toggleTheme } = useTheme();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isOpen: mobileMenuOpen, openMenu, closeMenu } = useMobileMenu();
 
   // Theme UI text and icons
   const themeIcon = theme === "dark" ? "🌞" : "🌙";
   const themeLabel = theme === "dark" ? "Dark" : "Light";
   const themeLabelMobile = theme === "dark" ? "Dark Mode" : "Light Mode";
-
-  /**
-   * Open mobile menu and prevent body scrolling
-   */
-  const openMenu = () => {
-    setMobileMenuOpen(true);
-    document.body.style.overflow = "hidden";
-  };
-
-  /**
-   * Close mobile menu and restore body scrolling
-   */
-  const closeMenu = () => {
-    setMobileMenuOpen(false);
-    document.body.style.overflow = "";
-  };
-
-  /**
-   * Handle Escape key to close menu
-   */
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && mobileMenuOpen) {
-        closeMenu();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [mobileMenuOpen]);
 
   return (
     <>

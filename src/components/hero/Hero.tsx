@@ -1,46 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useRain } from "@/hooks/useRain";
 
 /**
  * Hero Component
  * Full-screen hero section with video background and rain animation
  * Extracted from new_index.html hero section (lines 1618-1649)
- * Rain animation function from lines 45-59
  */
 export default function Hero() {
-  /**
-   * Create rain drop animation elements
-   * Replicates the createRainDrops() JavaScript function
-   */
-  useEffect(() => {
-    const rainOverlay = document.getElementById("rainOverlay");
-    if (!rainOverlay) return;
-
-    const dropCount = 40;
-    const drops: HTMLDivElement[] = [];
-
-    for (let i = 0; i < dropCount; i++) {
-      const drop = document.createElement("div");
-      drop.className = "rain-drop";
-      drop.style.left = Math.random() * 100 + "%";
-      drop.style.width = Math.random() * 3 + 1 + "px";
-      drop.style.height = Math.random() * 20 + 10 + "px";
-      drop.style.animationDelay = Math.random() * 5 + "s";
-      drop.style.animationDuration = Math.random() * 3 + 2 + "s";
-      rainOverlay.appendChild(drop);
-      drops.push(drop);
-    }
-
-    // Cleanup function to remove rain drops on unmount
-    return () => {
-      drops.forEach((drop) => {
-        if (rainOverlay.contains(drop)) {
-          rainOverlay.removeChild(drop);
-        }
-      });
-    };
-  }, []);
+  // Initialize rain animation
+  useRain("rainOverlay", 40);
 
   return (
     <section
