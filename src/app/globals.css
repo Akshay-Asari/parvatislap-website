@@ -1,6 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Tailwind v4 CSS-based configuration using @theme */
+@theme {
+  /* Custom color palette from original HTML */
+  --color-forest-green: #556b2f;
+  --color-sage-green: #9aad7a;
+  --color-warm-brown: #8b4513;
+  --color-muted-gray: #9ca3af;
+  --color-text-dark: #111827;
+  --color-nature-green: #6b8e23;
+  --color-earth-brown: #8b7355;
+  --color-sky-blue: #87ceeb;
+  --color-whatsapp-green: #556b2f;
+  --color-olive-green: #808000;
+  --color-olive-light: #9aad7a;
+  --color-olive-dark: #556b2f;
+  --color-neon-green: #39ff14;
+  --color-dark-forest: #1B3B2F;
+  --color-dark-emerald: #0F1F17;
+  --color-rich-green: #2d5a3d;
+
+  /* System font stack */
+  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Custom backdrop blur */
+  --backdrop-blur-xs: 2px;
+
+  /* Custom max-width */
+  --max-width-79rem: 79rem;
+
+  /* Custom breakpoints */
+  --breakpoint-3xl: 2560px;
+}
 
 /* Theme variables matching the original HTML design */
 .theme-dark {
@@ -23,7 +54,7 @@
 
 /* Base styles */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-system);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
