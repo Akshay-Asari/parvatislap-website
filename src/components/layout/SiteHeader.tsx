@@ -2,20 +2,20 @@
 
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
+import { MobileDrawer } from "./MobileDrawer";
 
 /**
  * SiteHeader Component
  * Main navigation with mobile drawer menu and theme toggle
- * Extracted from new_index.html navigation section (lines 1480-1547)
+ * Extracted from new_index.html navigation section (lines 1480-1516)
  */
 export function SiteHeader() {
   const { theme, toggleTheme } = useTheme();
   const { isOpen: mobileMenuOpen, openMenu, closeMenu } = useMobileMenu();
 
-  // Theme UI text and icons
+  // Theme UI text and icons for desktop
   const themeIcon = theme === "dark" ? "🌞" : "🌙";
   const themeLabel = theme === "dark" ? "Dark" : "Light";
-  const themeLabelMobile = theme === "dark" ? "Dark Mode" : "Light Mode";
 
   return (
     <>
@@ -132,90 +132,7 @@ export function SiteHeader() {
       </nav>
 
       {/* Mobile Menu Drawer */}
-      <div
-        className={`fixed inset-0 z-[9999] transition-[visibility,opacity] duration-300 ${
-          mobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"
-        }`}
-      >
-        <div
-          onClick={closeMenu}
-          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        ></div>
-        <div
-          className={`absolute top-0 right-0 bottom-0 w-[280px] max-w-[85vw] bg-primary shadow-[-4px_0_20px_rgba(0,0,0,0.2)] transition-transform duration-300 ease-in-out overflow-y-auto ${
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          <div className="flex items-center justify-between p-6 border-b border-theme">
-            <h2 className="text-xl font-light tracking-widest text-primary">MENU</h2>
-            <button
-              onClick={closeMenu}
-              className="p-2 rounded-lg transition-all"
-              aria-label="Close menu"
-            >
-              <svg
-                className="w-6 h-6 text-secondary"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
-            </button>
-          </div>
-          <nav className="p-6">
-            <ul className="flex flex-col gap-4 list-none m-0 p-0">
-              <li className="m-0 p-0">
-                <a href="#home" className="menu-link" onClick={closeMenu}>
-                  HOME
-                </a>
-              </li>
-              <li className="m-0 p-0">
-                <a href="#accommodations" className="menu-link" onClick={closeMenu}>
-                  HOSTEL & VILLA
-                </a>
-              </li>
-              <li className="m-0 p-0">
-                <a href="#cafe-things" className="menu-link" onClick={closeMenu}>
-                  CAFE & THINGS TO DO
-                </a>
-              </li>
-              <li className="m-0 p-0">
-                <a href="#reviews" className="menu-link" onClick={closeMenu}>
-                  REVIEWS
-                </a>
-              </li>
-              <li className="m-0 p-0">
-                <a href="#views" className="menu-link" onClick={closeMenu}>
-                  VIEWS
-                </a>
-              </li>
-              <li className="m-0 p-0">
-                <a href="#contact" className="menu-link" onClick={closeMenu}>
-                  CONTACT
-                </a>
-              </li>
-            </ul>
-            <div className="mt-8 pt-6 border-t border-theme">
-              <button
-                onClick={toggleTheme}
-                className="inline-flex items-center gap-3 cursor-pointer transition-all p-3 rounded-lg w-full justify-center"
-                aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-              >
-                <span className="text-2xl leading-none">{themeIcon}</span>
-                <span className="text-base font-medium tracking-wide leading-none">
-                  {themeLabelMobile}
-                </span>
-              </button>
-            </div>
-          </nav>
-        </div>
-      </div>
+      <MobileDrawer isOpen={mobileMenuOpen} onClose={closeMenu} />
     </>
   );
 }
