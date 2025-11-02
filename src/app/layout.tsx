@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "../../styles/globals.css";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ClientLayout } from "@/components/layout/ClientLayout";
 
 /**
  * Root metadata for SEO
@@ -15,8 +13,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * Root layout component
- * Wraps all pages with consistent header and footer
+ * Root layout component (Server Component)
+ * Provides the HTML shell and delegates client-side logic to ClientLayout
  */
 export default function RootLayout({
   children,
@@ -26,11 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="theme-light">
       <body className="font-system bg-primary text-primary transition-all duration-300">
-        <ThemeProvider>
-          <SiteHeader />
-          <main>{children}</main>
-          <SiteFooter />
-        </ThemeProvider>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
