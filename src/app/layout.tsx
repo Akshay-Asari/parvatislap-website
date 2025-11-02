@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../../styles/globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 /**
  * Root metadata for SEO
@@ -25,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="theme-light">
       <body className="font-system bg-primary text-primary transition-all duration-300">
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
+        <ThemeProvider>
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );
