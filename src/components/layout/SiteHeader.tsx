@@ -21,7 +21,7 @@ export function SiteHeader() {
     <>
       {/* Navigation */}
       <nav 
-        className="fixed top-0 left-0 right-0 h-20 2xl:h-40 flex items-center z-50 glass-bg border-b"
+        className="site-nav fixed top-0 left-0 right-0 flex items-center z-50 glass-bg border-b"
         style={{
           background: theme === 'dark' ? 'rgba(0,0,0,0.95)' : 'rgba(248, 253, 248, 0.95)',
           backdropFilter: 'blur(8px)',

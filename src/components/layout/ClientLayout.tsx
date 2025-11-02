@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
+import { PageLoader } from "@/components/loader/PageLoader";
 
 /**
  * ClientLayout Component
@@ -13,6 +14,7 @@ import { SiteFooter } from "./SiteFooter";
 export function ClientLayout({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
+      <PageLoader />
       <SiteHeader />
       <main>{children}</main>
       <SiteFooter />

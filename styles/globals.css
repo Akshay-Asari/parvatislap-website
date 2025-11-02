@@ -24,6 +24,45 @@
             --border-color: #d4e6d4;
         }
 		
+		/* Navigation Bar Height - Fixed for all screens */
+		nav.site-nav {
+			height: 80px; /* h-20 = 5rem = 80px */
+		}
+		
+		@media (min-width: 1536px) {
+			nav.site-nav {
+				height: 160px; /* 2xl:h-40 = 10rem = 160px */
+			}
+		}
+		
+		/* Page Loader Animations */
+		@keyframes spin {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
+		
+		@keyframes bounce {
+			0%, 100% {
+				transform: translateY(0);
+			}
+			50% {
+				transform: translateY(-0.5rem);
+			}
+		}
+		
+		@keyframes pulse {
+			0%, 100% {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0.5;
+			}
+		}
+		
 		.theme-light .hero-title {
             color: #ffffff;
             text-shadow: 
