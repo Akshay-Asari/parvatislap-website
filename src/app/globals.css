@@ -1,26 +1,47 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Theme variables matching the original HTML design */
+.theme-dark {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --text-primary: #e6f4e6;
+  --text-secondary: #9fb3a0;
+  --muted: #7a8a7a;
+  --border-color: rgba(154, 173, 122, 0.2);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.theme-light {
+  --bg-primary: #fefffe;
+  --bg-secondary: #f8fdf8;
+  --text-primary: #1a2e1a;
+  --text-secondary: #4a6b4a;
+  --muted: #6b8a6b;
+  --border-color: #d4e6d4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility classes for theme variables */
+.bg-primary { background: var(--bg-primary); }
+.bg-secondary { background: var(--bg-secondary); }
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--muted); }
+.border-theme { border-color: var(--border-color); }
+
+/* Glassmorphism effect for booking widget */
+.glass-bg { 
+  background: rgba(248, 253, 248, 0.95); 
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px); 
+}
+
+.theme-dark .glass-bg { 
+  background: rgba(0,0,0,0.95); 
 }
