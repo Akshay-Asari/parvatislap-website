@@ -20,7 +20,15 @@ export function SiteHeader() {
   return (
     <>
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 h-20 2xl:h-40 flex items-center z-50 glass-bg border-b border-theme">
+      <nav 
+        className="fixed top-0 left-0 right-0 h-20 2xl:h-40 flex items-center z-50 glass-bg border-b"
+        style={{
+          background: theme === 'dark' ? 'rgba(0,0,0,0.95)' : 'rgba(248, 253, 248, 0.95)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          borderBottomColor: theme === 'dark' ? 'rgba(57, 255, 20, 0.2)' : '#d4e6d4',
+        }}
+      >
         <div className="w-full px-2 sm:px-6 lg:px-6 xl:px-8 2xl:px-10 flex items-center justify-between lg:justify-between">
           {/* Mobile Hamburger Button - Left Side */}
           <button
@@ -117,8 +125,15 @@ export function SiteHeader() {
 
             <button
               onClick={toggleTheme}
+              id="theme-toggle"
               className="hidden lg:inline-flex items-center gap-2 cursor-pointer transition-all ml-2 lg:ml-4 p-2 rounded-lg flex-shrink-0"
               aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+              style={{
+                background: theme === 'dark' ? 'rgba(57, 255, 20, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                border: theme === 'dark' ? '1px solid rgba(57, 255, 20, 0.4)' : '1px solid rgba(255, 255, 255, 0.2)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+              }}
             >
               <span className="text-lg leading-none [@media(min-width:2560px)]:text-[30px]">
                 {themeIcon}
