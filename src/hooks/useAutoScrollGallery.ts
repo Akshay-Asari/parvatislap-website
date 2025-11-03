@@ -18,26 +18,6 @@ export function useAutoScrollGallery(scrollSpeed: number = 0.6, itemWidth: numbe
   const resumeTimeoutRef = useRef<NodeJS.Timeout>();
 
   /**
-   * Clone all gallery items for seamless infinite loop
-   */
-  const cloneItems = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    // Get original items (non-cloned)
-    const originalItems = Array.from(track.children).filter(
-      (child) => !child.hasAttribute("data-cloned")
-    );
-
-    // Clone and append items
-    originalItems.forEach((item) => {
-      const clone = item.cloneNode(true) as HTMLElement;
-      clone.setAttribute("data-cloned", "true");
-      track.appendChild(clone);
-    });
-  }, []);
-
-  /**
    * Continuous scroll animation
    */
   const continuousScroll = useCallback(() => {
@@ -45,9 +25,16 @@ export function useAutoScrollGallery(scrollSpeed: number = 0.6, itemWidth: numbe
     if (!track || !isScrollingRef.current) return;
 
     scrollPositionRef.current += scrollSpeed;
-    const trackWidth = track.scrollWidth / 2; // Half because we cloned items
+    
+    // Get count of original items (items without data-cloned attribute)
+    const originalItems = Array.from(track.children).filter(
+      (child) => !child.hasAttribute("data-cloned")
+    );
+    const itemWidth = originalItems[0]?.getBoundingClientRect().width || 424;
+    const gap = 24; // gap between items
+    const trackWidth = originalItems.length * (itemWidth + gap);
 
-    // Reset position when reaching end
+    // Reset position when reaching end of original items
     if (scrollPositionRef.current >= trackWidth) {
       scrollPositionRef.current = 0;
     }
@@ -118,7 +105,6 @@ export function useAutoScrollGallery(scrollSpeed: number = 0.6, itemWidth: numbe
    * Initialize gallery on mount
    */
   useEffect(() => {
-    cloneItems();
     startScroll();
 
     const container = containerRef.current;
@@ -139,7 +125,7 @@ export function useAutoScrollGallery(scrollSpeed: number = 0.6, itemWidth: numbe
         container.removeEventListener("mouseleave", startScroll);
       }
     };
-  }, [cloneItems, startScroll, stopScroll]);
+  }, [startScroll, stopScroll]);
 
   return {
     containerRef,
