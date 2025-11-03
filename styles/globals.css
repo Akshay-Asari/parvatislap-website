@@ -8,6 +8,24 @@
 @theme {
   /* Custom breakpoint for ultra-wide screens (2560px+) */
   --breakpoint-3xl: 2560px;
+  
+  /* Custom colors from legacy HTML */
+  --color-forest-green: #556b2f;
+  --color-sage-green: #9aad7a;
+  --color-warm-brown: #8b4513;
+  --color-muted-gray: #9ca3af;
+  --color-text-dark: #111827;
+  --color-nature-green: #6b8e23;
+  --color-earth-brown: #8b7355;
+  --color-sky-blue: #87ceeb;
+  --color-whatsapp-green: #556b2f;
+  --color-olive-green: #808000;
+  --color-olive-light: #9aad7a;
+  --color-olive-dark: #556b2f;
+  --color-neon-green: #39ff14;
+  --color-dark-forest: #1B3B2F;
+  --color-dark-emerald: #0F1F17;
+  --color-rich-green: #2d5a3d;
 }
 
 /* ======================================

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
 import { MobileDrawer } from "./MobileDrawer";
@@ -52,19 +53,23 @@ export function SiteHeader() {
           </button>
 
           {/* Logo - Center on Mobile, Left on Desktop */}
-          <div className="flex items-center gap-2 flex-shrink-0 order-2 lg:order-1 absolute left-1/2 transform -translate-x-1/2 lg:relative lg:left-auto lg:transform-none">
+          <div className="ml-[7rem] flex items-center gap-2 flex-shrink-0 order-2 lg:order-1 absolute left-1/2 transform -translate-x-1/2 lg:relative lg:left-auto lg:transform-none 3xl:m-[18rem]">
             <a
               href="#home"
               className="flex items-center font-light text-xl sm:text-2xl tracking-widest no-underline text-olive-green flex-shrink-0"
             >
-              <img
+              <Image 
                 src="/images/logo-updated.png"
                 alt="Parvati's Lap Logo"
+                width={69}
+                height={37}
                 className="w-[69px] h-[37px] mr-3 3xl:w-[240px] 3xl:h-[120px]"
               />
-              <img
+              <Image
                 src="/images/logo-text.png"
                 alt="PARVATI'S LAP"
+                width={169}
+                height={169}
                 className="h-[169px] w-auto 3xl:h-[373px] 3xl:ml-[15px]"
               />
             </a>

@@ -1,17 +1,180 @@
+"use client";
+
+import { useImageModal } from "@/hooks/useImageModal";
+import { ImageModal } from "@/components/modal/ImageModal";
+import Image from "next/image";
+
 /**
  * Accommodations Component
- * Hostel & Villa section with gallery
- * Will be implemented with the exact design from new_index.html
+ * Displays all accommodation options in a grid layout
+ * Each card opens an image carousel modal when clicked
+ * Extracted from legacy-index.html (lines 1677-1815)
  */
-export default function Accommodations() {
-  return (
-    <section id="accommodations" className="section-spacing container-responsive">
-      <div className="text-center mb-12">
-        <h2 className="title-section">HOSTEL & VILLA</h2>
-        <p className="text-secondary">Comfortable accommodations in the heart of nature</p>
-      </div>
-      {/* Gallery will be implemented */}
-    </section>
-  );
+
+// Accommodation data structure
+interface Accommodation {
+  id: string;
+  title: string;
+  subtitle?: string;
+  description: string;
+  images: string[];
+  mainImage: string;
 }
 
+const accommodations: Accommodation[] = [
+  {
+    id: "meghbari-villa",
+    title: "Meghbari Luxury Villa",
+    description: "Exclusive private villa with 180-degree glacier views and complete seclusion. Perfect for honeymoon couples seeking ultimate luxury.",
+    images: [
+      "/images/MeghbariVilla/Villa1.jpg",
+      "/images/MeghbariVilla/Villa2.jpg",
+      "/images/MeghbariVilla/Villa3.jpg",
+      "/images/MeghbariVilla/Villa4.jpg",
+      "/images/MeghbariVilla/Villa5.jpg",
+      "/images/MeghbariVilla/Villa6.jpg",
+      "/images/MeghbariVilla/Villa7.jpg",
+      "/images/MeghbariVilla/Villa8.jpg",
+      "/images/MeghbariVilla/Villa9.jpg",
+      "/images/MeghbariVilla/Villa10.jpg",
+    ],
+    mainImage: "/images/MeghbariVilla/Villa1.jpg",
+  },
+  {
+    id: "4-beds-wood-room",
+    title: "4 Beds Wood Room",
+    subtitle: "Attached Washroom",
+    description: "Cozy wooden room with traditional Himachali architecture, accommodating up to 4 guests with mountain views.",
+    images: [
+      "/images/4BedsWoodRoom/WoodRoom1.jpg",
+      "/images/4BedsWoodRoom/WoodRoom2.jpg",
+      "/images/4BedsWoodRoom/WoodRoom3.jpg",
+      "/images/4BedsWoodRoom/WoodRoom4.jpg",
+      "/images/4BedsWoodRoom/WoodRoom5.jpg",
+    ],
+    mainImage: "/images/4BedsWoodRoom/WoodRoom1.jpg",
+  },
+  {
+    id: "3-beds-attic-room",
+    title: "3 Beds Attic Room",
+    subtitle: "Inter connected with 4 bed Balcony room\nAttached Washroom",
+    description: "Charming attic room with unique architecture and stunning valley views, perfect for small groups.",
+    images: [
+      "/images/3BedsBalconyRoom/3BedsBalconyRoom1.jpg",
+      "/images/3BedsBalconyRoom/3BedsBalconyRoom2.jpg",
+      "/images/3BedsBalconyRoom/3BedsBalconyRoom3.jpg",
+      "/images/3BedsBalconyRoom/3BedsBalconyRoom4.jpg",
+    ],
+    mainImage: "/images/3BedsBalconyRoom/3BedsBalconyRoom1.jpg",
+  },
+  {
+    id: "4-beds-balcony-room",
+    title: "4 Beds Balcony Room",
+    subtitle: "Interconnected with 3 Beds Attic Room\nAttached Washroom",
+    description: "Spacious room with private balcony offering panoramic mountain views and fresh Himalayan air.",
+    images: [
+      "/images/4BedsBalconyRoom/4BedsBalconyRoom1.jpg",
+      "/images/4BedsBalconyRoom/4BedsBalconyRoom2.jpg",
+      "/images/4BedsBalconyRoom/4BedsBalconyRoom3.jpg",
+      "/images/4BedsBalconyRoom/4BedsBalconyRoom4.jpg",
+    ],
+    mainImage: "/images/4BedsBalconyRoom/4BedsBalconyRoom1.jpg",
+  },
+  {
+    id: "4-beds-hemp-room",
+    title: "4 Beds Hemp Room",
+    subtitle: "Outside Washroom",
+    description: "Eco-friendly room built with natural hemp materials, offering sustainable comfort in the mountains.",
+    images: [
+      "/images/4BedsHempRoom/HempRoom1.jpg",
+      "/images/4BedsHempRoom/HempRoom2.jpg",
+      "/images/4BedsHempRoom/HempRoom3.jpg",
+      "/images/4BedsHempRoom/HempRoom4.jpg",
+    ],
+    mainImage: "/images/4BedsHempRoom/HempRoom4.jpg",
+  },
+  {
+    id: "14-beds-stone-room",
+    title: "14 Beds Stone Room",
+    subtitle: "Outside Washroom",
+    description: "Large dormitory with traditional stone construction, perfect for backpackers and budget travelers.",
+    images: [
+      "/images/14BedsStoneRoom/StoneRoom1.jpg",
+      "/images/14BedsStoneRoom/StoneRoom2.jpg",
+      "/images/14BedsStoneRoom/StoneRoom3.jpg",
+      "/images/14BedsStoneRoom/StoneRoom4.jpg",
+      "/images/14BedsStoneRoom/StoneRoom5.jpg",
+    ],
+    mainImage: "/images/14BedsStoneRoom/StoneRoom3.jpg",
+  },
+];
+
+export default function Accommodations() {
+  const { isOpen, images, mode, openCarousel, closeModal } = useImageModal();
+
+  const handleCardClick = (accommodationImages: string[]) => {
+    openCarousel(accommodationImages);
+  };
+
+  return (
+    <>
+      <section id="accommodations" className="bg-secondary py-24 px-6 3xl:py-24 3xl:px-48">
+        <div className="max-w-79rem 3xl:max-w-[235rem] mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="section-title title-section">HOSTEL & VILLA</h1>
+            <p className="text-lg text-secondary max-w-[600px] mx-auto leading-normal 3xl:text-[2rem] 3xl:max-w-[59rem]">
+              Choose from our range of comfortable stays, from budget-friendly hostel beds to luxury private villas.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {accommodations.map((accommodation) => (
+              <div
+                key={accommodation.id}
+                className="accommodation-card"
+                onClick={() => handleCardClick(accommodation.images)}
+              >
+                <div className="accommodation-image 3xl:h-[26rem]">
+                  <Image
+                    src={accommodation.mainImage}
+                    alt={accommodation.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={false}
+                  />
+                </div>
+                <div className="accommodation-content 3xl:p-[82px]">
+                  <h3 className="accommodation-title 3xl:text-[3rem]">
+                    {accommodation.title}
+                  </h3>
+                  {accommodation.subtitle && (
+                    <p className="accommodation-subtitle 3xl:text-[21px]">
+                      {accommodation.subtitle.split('\n').map((line, i) => (
+                        <span key={i}>
+                          {line}
+                          {i < accommodation.subtitle!.split('\n').length - 1 && <br />}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                  <p className="accommodation-description 3xl:text-[28px] 3xl:leading-[3rem]">
+                    {accommodation.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Image Modal for Accommodation Carousels */}
+      <ImageModal
+        isOpen={isOpen}
+        images={images}
+        mode={mode}
+        onClose={closeModal}
+      />
+    </>
+  );
+}
