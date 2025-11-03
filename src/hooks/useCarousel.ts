@@ -11,9 +11,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
  */
 export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const autoScrollIntervalRef = useRef<NodeJS.Timeout>();
-  const resumeTimeoutRef = useRef<NodeJS.Timeout>();
+  const autoScrollIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   /**
    * Navigate to next slide
@@ -37,25 +36,23 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
   }, []);
 
   /**
-   * Start auto-scroll
+   * Start auto-scroll (without state update to avoid cascading renders)
    */
   const startAutoScroll = useCallback(() => {
     if (autoScrollIntervalRef.current) {
       clearInterval(autoScrollIntervalRef.current);
     }
-    setIsAutoScrolling(true);
     autoScrollIntervalRef.current = setInterval(nextSlide, autoScrollDelay);
   }, [nextSlide, autoScrollDelay]);
 
   /**
-   * Stop auto-scroll
+   * Stop auto-scroll (without state update to avoid cascading renders)
    */
   const stopAutoScroll = useCallback(() => {
     if (autoScrollIntervalRef.current) {
       clearInterval(autoScrollIntervalRef.current);
       autoScrollIntervalRef.current = undefined;
     }
-    setIsAutoScrolling(false);
   }, []);
 
   /**
@@ -69,7 +66,9 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
     if (resumeTimeoutRef.current) {
       clearTimeout(resumeTimeoutRef.current);
     }
-    resumeTimeoutRef.current = setTimeout(startAutoScroll, 5000);
+    resumeTimeoutRef.current = setTimeout(() => {
+      startAutoScroll();
+    }, 5000);
   }, [stopAutoScroll, prevSlide, startAutoScroll]);
 
   const handleNext = useCallback(() => {
@@ -80,7 +79,9 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
     if (resumeTimeoutRef.current) {
       clearTimeout(resumeTimeoutRef.current);
     }
-    resumeTimeoutRef.current = setTimeout(startAutoScroll, 5000);
+    resumeTimeoutRef.current = setTimeout(() => {
+      startAutoScroll();
+    }, 5000);
   }, [stopAutoScroll, nextSlide, startAutoScroll]);
 
   /**
@@ -113,14 +114,20 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
         clearTimeout(resumeTimeoutRef.current);
       }
     };
-  }, [images.length, startAutoScroll, stopAutoScroll]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [images.length]);
 
   /**
-   * Reset slide when images change
+   * Reset slide when images array reference changes
+   * Using ref to avoid triggering effect on every render
    */
-  useEffect(() => {
-    setCurrentSlide(0);
-  }, [images]);
+  const prevImagesRef = useRef(images);
+  if (prevImagesRef.current !== images) {
+    prevImagesRef.current = images;
+    if (currentSlide >= images.length) {
+      setCurrentSlide(0);
+    }
+  }
 
   /**
    * Get prev, current, and next slide indices for display
@@ -137,7 +144,6 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
     goToSlide,
     handlePrev,
     handleNext,
-    isAutoScrolling,
     startAutoScroll,
     stopAutoScroll,
   };
