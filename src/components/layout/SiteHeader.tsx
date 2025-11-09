@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
  * SiteHeader Component
  * Main navigation with mobile drawer menu and theme toggle
  * Extracted from new_index.html navigation section (lines 1480-1516)
+ * jhjkjdjd test
  */
 export function SiteHeader() {
   const { theme, toggleTheme } = useTheme();
