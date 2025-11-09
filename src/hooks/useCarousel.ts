@@ -7,10 +7,16 @@ import { useState, useEffect, useCallback, useRef } from "react";
  * 
  * @param images - Array of image URLs
  * @param autoScrollDelay - Auto-scroll interval in ms (default: 2500)
+ * @param initialSlide - Initial slide index (default: 0)
  * @returns {object} Carousel state and control functions
  */
-export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
-  const [currentSlide, setCurrentSlide] = useState(0);
+export function useCarousel(images: string[], autoScrollDelay: number = 2500, initialSlide: number = 0) {
+  // Debug: Check incoming images
+  console.log('🎠 useCarousel - Received images:', images);
+  console.log('🎠 useCarousel - Images count:', images.length);
+  console.log('🎠 useCarousel - Initial slide:', initialSlide);
+  
+  const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const resumeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
@@ -118,15 +124,19 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
   }, [images.length]);
 
   /**
-   * Reset slide when images array reference changes
+   * Reset slide when images array reference changes OR when initialSlide changes
    * Using ref to avoid triggering effect on every render
    */
   const prevImagesRef = useRef(images);
-  if (prevImagesRef.current !== images) {
+  const prevInitialSlideRef = useRef(initialSlide);
+  
+  if (prevImagesRef.current !== images || prevInitialSlideRef.current !== initialSlide) {
     prevImagesRef.current = images;
-    if (currentSlide >= images.length) {
-      setCurrentSlide(0);
-    }
+    prevInitialSlideRef.current = initialSlide;
+    // Reset to initialSlide or 0 if current slide is out of bounds
+    const validInitialSlide = initialSlide < images.length ? initialSlide : 0;
+    setCurrentSlide(validInitialSlide);
+    console.log('🎠 useCarousel - Resetting to slide:', validInitialSlide);
   }
 
   /**
@@ -134,6 +144,15 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500) {
    */
   const prevIndex = (currentSlide - 1 + images.length) % images.length;
   const nextIndex = (currentSlide + 1) % images.length;
+
+  // Debug: Log current carousel state
+  console.log('🎠 useCarousel - Current state:', {
+    currentSlide,
+    currentImage: images[currentSlide],
+    totalImages: images.length,
+    prevIndex,
+    nextIndex
+  });
 
   return {
     currentSlide,

@@ -101,3 +101,9 @@ In globals.css:
 - [ ] Responsive breakpoints work (2xl)
 - [ ] Theme variables apply correctly
 
+
+
+
+
+
+

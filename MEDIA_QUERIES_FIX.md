@@ -337,3 +337,9 @@ grep -r "\[@media" src/
 
 The responsive design now functions as intended across ALL screen sizes, including ultra-wide monitors! 🖥️✨
 
+
+
+
+
+
+

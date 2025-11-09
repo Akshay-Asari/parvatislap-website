@@ -6,8 +6,10 @@
  * <StructuredData data={organizationSchema} />
  */
 
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
 interface StructuredDataProps {
-  data: Record<string, any>;
+  data: JsonValue;
 }
 
 export function StructuredData({ data }: StructuredDataProps) {
@@ -18,4 +20,8 @@ export function StructuredData({ data }: StructuredDataProps) {
     />
   );
 }
+
+
+
+
 

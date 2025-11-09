@@ -11,6 +11,7 @@ export function useImageModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [mode, setMode] = useState<"single" | "carousel">("single");
+  const [startIndex, setStartIndex] = useState(0);
 
   /**
    * Open modal with a single image
@@ -18,15 +19,19 @@ export function useImageModal() {
   const openSingleImage = useCallback((imageSrc: string) => {
     setImages([imageSrc]);
     setMode("single");
+    setStartIndex(0);
     setIsOpen(true);
   }, []);
 
   /**
    * Open modal with carousel of images
+   * @param imageArray - Array of images to display
+   * @param initialIndex - Index of the image to start with (default: 0)
    */
-  const openCarousel = useCallback((imageArray: string[]) => {
+  const openCarousel = useCallback((imageArray: string[], initialIndex: number = 0) => {
     setImages(imageArray);
     setMode("carousel");
+    setStartIndex(initialIndex);
     setIsOpen(true);
   }, []);
 
@@ -59,6 +64,7 @@ export function useImageModal() {
     isOpen,
     images,
     mode,
+    startIndex,
     openSingleImage,
     openCarousel,
     closeModal,

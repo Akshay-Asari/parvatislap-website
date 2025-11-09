@@ -40,10 +40,13 @@ export const siteConfig = {
     address: "Lapas Village, Kasol, Parvati Valley, Himachal Pradesh, India",
   },
   social: {
-    // Add social media links when available
-    facebook: "",
-    instagram: "",
+    facebook: "https://www.facebook.com/profile.php?id=61551650361876",
+    instagram: "https://instagram.com/parvatis_lap",
+    youtube: "https://youtube.com/shorts/F8MC3NGpUw0?si=y-NsCzuN0uHCIWoZ",
     twitter: "",
+  },
+  hours: {
+    openingHours: "Mo-Su 00:00-24:00", // 24/7 availability
   },
 };
 
@@ -87,6 +90,31 @@ export function generateMetadata({
     alternates: {
       canonical: pageUrl,
     },
+    icons: {
+      icon: [
+        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+        { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/favicon.ico', sizes: '48x48' },
+      ],
+      apple: [
+        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      ],
+      other: [
+        {
+          rel: 'icon',
+          url: '/android-chrome-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          rel: 'icon',
+          url: '/android-chrome-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+      ],
+    },
+    manifest: '/site.webmanifest',
     openGraph: {
       type,
       locale: "en_US",
@@ -154,20 +182,23 @@ export function generateOrganizationSchema() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "32.0100", // Update with actual coordinates
-      longitude: "77.3200", // Update with actual coordinates
+      latitude: "32.029590", // Parvati's Lap, Lapas Village, Kasol (accurate coordinates)
+      longitude: "77.367433",
     },
     priceRange: "₹₹",
+    openingHours: siteConfig.hours.openingHours,
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Mountain View" },
       { "@type": "LocationFeatureSpecification", name: "Cafe" },
       { "@type": "LocationFeatureSpecification", name: "Trek Access" },
       { "@type": "LocationFeatureSpecification", name: "WiFi" },
+      { "@type": "LocationFeatureSpecification", name: "Bonfire" },
+      { "@type": "LocationFeatureSpecification", name: "Outdoor Seating" },
     ],
     sameAs: [
-      // Add social media URLs when available
       siteConfig.social.facebook,
       siteConfig.social.instagram,
+      siteConfig.social.youtube,
       siteConfig.social.twitter,
     ].filter(Boolean),
   };
@@ -242,4 +273,6 @@ export function generateHotelRoomSchema(room: {
     },
   };
 }
+
+
 

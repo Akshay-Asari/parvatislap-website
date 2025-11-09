@@ -14,8 +14,8 @@ export function useAutoScrollGallery(scrollSpeed: number = 0.6, itemWidth: numbe
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef(0);
   const isScrollingRef = useRef(true);
-  const animationIdRef = useRef<number>();
-  const resumeTimeoutRef = useRef<NodeJS.Timeout>();
+  const animationIdRef = useRef<number | null>(null);
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   /**
    * Continuous scroll animation

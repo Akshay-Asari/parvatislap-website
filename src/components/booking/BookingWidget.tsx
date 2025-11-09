@@ -1,31 +1,35 @@
 "use client";
 
-import { useBookingWidget } from "@/hooks/useBookingWidget";
+import { useState } from "react";
+import Image from "next/image";
 
 /**
  * BookingWidget Component
- * Glassmorphism booking widget with expand/collapse functionality
- * Extracted from new_index.html booking widget section (lines 1549-1616)
- * 
- * Features:
- * - Fixed position with glassmorphism effect
- * - Expandable form (currently kept collapsed for cleaner UX)
- * - Direct link to external booking system
- * - Analytics tracking on book button clicks
+ * Fixed position booking widget with glassmorphism effect
+ * Features booking form and external booking link
+ * Replica of new_index.html Booking Widget (lines 1549-1616)
+ * Starts in minimized state by default
  */
 
-const BOOKING_URL = "https://live.ipms247.com/booking/book-rooms-parvatislaphostelcamps";
+// Google Analytics gtag type
+type GtagFunction = (command: string, eventName: string, params: Record<string, string | number>) => void;
+
+// Get booking URL from environment variable
+const BOOKING_URL =
+  process.env.NEXT_PUBLIC_BOOKING_URL ||
+  "https://live.ipms247.com/booking/book-rooms-parvatislaphostelcamps";
 
 export default function BookingWidget() {
-  const { isCollapsed, toggle } = useBookingWidget(true);
+  // Collapsed by default (minimized state)
+  const [isCollapsed] = useState(true);
 
   /**
    * Track booking widget click for analytics
    */
   const handleBookingClick = () => {
     // Google Analytics tracking (if GA is configured)
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "booking_click", {
+    if (typeof window !== "undefined" && (window as unknown as { gtag?: GtagFunction }).gtag) {
+      ((window as unknown as { gtag: GtagFunction }).gtag)("event", "booking_click", {
         event_category: "engagement",
         event_label: "booking_widget_header",
         value: 1,
@@ -41,8 +45,8 @@ export default function BookingWidget() {
    */
   const handleFormBookingClick = () => {
     // Google Analytics tracking
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "booking_submit", {
+    if (typeof window !== "undefined" && (window as unknown as { gtag?: GtagFunction }).gtag) {
+      ((window as unknown as { gtag: GtagFunction }).gtag)("event", "booking_submit", {
         event_category: "conversion",
         event_label: "booking_widget_form",
         value: 1,
@@ -55,14 +59,14 @@ export default function BookingWidget() {
   return (
     <div
       id="booking-widget"
-      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:left-auto lg:right-8 lg:transform-none w-11/12 max-w-[12rem] lg:w-85 rounded-3xl 2xl:rounded-[4rem] z-40 overflow-hidden transition-all duration-300 shadow-2xl booking-glass 3xl:max-w-[33rem] ${
-        isCollapsed ? "" : "max-w-[24rem]"
-      }`}
+      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:left-auto lg:right-[-41px] [@media(min-width:2560px)]:right-[-152px] lg:transform-none w-11/12 ${
+        isCollapsed ? "max-w-[12rem]" : ""
+      } lg:w-85 rounded-3xl [@media(min-width:1536px)]:rounded-[5rem] z-40 overflow-hidden transition-all duration-300 shadow-2xl booking-glass [@media(min-width:2560px)]:max-w-[33rem] [@media(min-width:2560px)]:w-[33rem]`}
     >
       {/* Header - Always Visible */}
       <div
         id="booking-header"
-        className="p-2 flex items-center justify-between relative booking-content-glass min-h-16 2xl:min-h-4xl cursor-pointer 3xl:p-[1.5rem] 3xl:min-h-[11rem]"
+        className="p-2 flex items-center justify-between relative booking-content-glass min-h-16 2xl:min-h-4xl cursor-pointer [@media(min-width:2560px)]:p-[1.5rem] [@media(min-width:2560px)]:min-h-[11rem]"
       >
         <a
           href={BOOKING_URL}
@@ -72,30 +76,40 @@ export default function BookingWidget() {
           onClick={handleBookingClick}
         >
           <div>
-            <img
-              src="/images/BookNow3.png"
-              alt="Book Now"
-              className="icon-img w-[59px] h-[59px] 3xl:w-[155px] 3xl:h-[155px]"
-            />
+        <Image
+          src="/images/BookNow3.png"
+          alt="Book Now"
+          width={59}
+          height={59}
+          className="inline w-[59px] h-[59px] [@media(min-width:2560px)]:w-[155px] [@media(min-width:2560px)]:h-[155px]"
+          style={{
+            filter: 'drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35))'
+          }}
+        />
           </div>
           <div>
-            <h3
-              className="text-lg 2xl:text-[2.25rem] font-black tracking-tight text-yellow-400"
-              style={{ paddingBottom: "8px", WebkitTextStroke: "1px #000000" }}
+            <h3 
+              className="text-lg 2xl:text-[2rem] font-bold tracking-wide pb-2"
+              style={{
+                fontFamily: "'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                color: '#fbbf24',
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.8)',
+                letterSpacing: '0.05em'
+              }}
             >
               Book Now
             </h3>
           </div>
         </a>
-
-        {/* Minimize/Expand Button - Future use */}
-        {/* Uncomment if you want to enable expand/collapse functionality */}
-        {/*
+        
+        {/* Minimize/Expand button - for future use
+        To enable: uncomment this code and add setIsCollapsed to useState above
         <div>
           <button
+            id="minimize-btn"
             onClick={(e) => {
               e.preventDefault();
-              toggle();
+              setIsCollapsed(!isCollapsed);
             }}
             className="absolute top-4 right-5 bg-white bg-opacity-10 backdrop-blur-10 border border-white border-opacity-20 px-2.5 py-1.5 2xl:px-3.5 2xl:py-3 2xl:rounded-xl 2xl:text-5xl 2xl:top-4 rounded-lg text-sm cursor-pointer font-semibold hover:bg-opacity-20 hover:scale-105 transition-all"
             aria-label={isCollapsed ? "Expand booking form" : "Collapse booking form"}
@@ -106,12 +120,9 @@ export default function BookingWidget() {
         */}
       </div>
 
-      {/* Booking Form - Expandable (currently hidden by default) */}
+      {/* Booking Form - Hidden when collapsed */}
       {!isCollapsed && (
-        <div
-          id="booking-content"
-          className="p-6 max-h-96 overflow-auto"
-        >
+        <div id="booking-content" className="p-6 max-h-96 overflow-auto">
           {/* Experience Type */}
           <div className="mb-4">
             <label

@@ -23,9 +23,24 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
   const themeLabelMobile = theme === "dark" ? "Dark Mode" : "Light Mode";
 
   /**
-   * Handle link click - close drawer and navigate
+   * Handle link click - smooth scroll to section and close drawer
    */
-  const handleLinkClick = () => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    
+    const targetElement = document.querySelector(targetId);
+    if (!targetElement) return;
+
+    const headerHeight = 80; // Default header height
+    const elementPosition = targetElement.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+
+    // Close drawer after navigation
     onClose();
   };
 
@@ -77,7 +92,11 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
         <nav className="p-6">
           <ul className="flex flex-col gap-4 list-none m-0 p-0">
             <li className="m-0 p-0">
-              <a href="#home" className="menu-link" onClick={handleLinkClick}>
+              <a 
+                href="#home" 
+                className="menu-link" 
+                onClick={(e) => handleLinkClick(e, '#home')}
+              >
                 HOME
               </a>
             </li>
@@ -85,7 +104,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               <a
                 href="#accommodations"
                 className="menu-link"
-                onClick={handleLinkClick}
+                onClick={(e) => handleLinkClick(e, '#accommodations')}
               >
                 HOSTEL & VILLA
               </a>
@@ -94,7 +113,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               <a
                 href="#cafe-things"
                 className="menu-link"
-                onClick={handleLinkClick}
+                onClick={(e) => handleLinkClick(e, '#cafe-things')}
               >
                 CAFE & THINGS TO DO
               </a>
@@ -103,13 +122,17 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               <a
                 href="#reviews"
                 className="menu-link"
-                onClick={handleLinkClick}
+                onClick={(e) => handleLinkClick(e, '#reviews')}
               >
                 REVIEWS
               </a>
             </li>
             <li className="m-0 p-0">
-              <a href="#views" className="menu-link" onClick={handleLinkClick}>
+              <a 
+                href="#views" 
+                className="menu-link" 
+                onClick={(e) => handleLinkClick(e, '#views')}
+              >
                 VIEWS
               </a>
             </li>
@@ -117,7 +140,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               <a
                 href="#contact"
                 className="menu-link"
-                onClick={handleLinkClick}
+                onClick={(e) => handleLinkClick(e, '#contact')}
               >
                 CONTACT
               </a>
@@ -142,4 +165,10 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
     </div>
   );
 }
+
+
+
+
+
+
 

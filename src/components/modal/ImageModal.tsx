@@ -18,11 +18,15 @@ interface ImageModalProps {
   isOpen: boolean;
   images: string[];
   mode: "single" | "carousel";
+  startIndex?: number;
   onClose: () => void;
 }
 
-export function ImageModal({ isOpen, images, mode, onClose }: ImageModalProps) {
-  const carousel = useCarousel(images, 2500);
+export function ImageModal({ isOpen, images, mode, startIndex = 0, onClose }: ImageModalProps) {
+  // Debug: Check what ImageModal receives
+  console.log('🖼️ ImageModal - Props:', { isOpen, images, mode, startIndex, imagesCount: images.length });
+  
+  const carousel = useCarousel(images, 2500, startIndex);
 
   /**
    * Handle click on modal backdrop to close
@@ -48,13 +52,24 @@ export function ImageModal({ isOpen, images, mode, onClose }: ImageModalProps) {
     };
   }, [isOpen]);
 
-  if (!isOpen || images.length === 0) return null;
+  if (!isOpen || images.length === 0) {
+    console.log('🖼️ ImageModal - NOT rendering (closed or no images):', { isOpen, imagesCount: images.length });
+    return null;
+  }
+
+  console.log('🖼️ ImageModal - RENDERING with active class:', { 
+    isOpen, 
+    mode, 
+    imagesCount: images.length,
+    currentSlide: carousel.currentSlide 
+  });
 
   return (
     <div
       className={`image-modal ${isOpen ? "active" : ""}`}
       id="imageModal"
-      aria-hidden={!isOpen}
+      role="dialog"
+      aria-modal="true"
       onClick={handleBackdropClick}
     >
       {/* Close Button */}
@@ -106,12 +121,22 @@ export function ImageModal({ isOpen, images, mode, onClose }: ImageModalProps) {
                 slideClass += " carousel-slide-next";
               }
 
+              // Debug: Log each image render
+              console.log(`🖼️ Rendering slide ${index}:`, {
+                src: image,
+                class: slideClass,
+                isActive: index === carousel.currentSlide,
+                currentSlide: carousel.currentSlide
+              });
+
               return (
                 <img
                   key={`${image}-${index}`}
                   src={image}
                   alt={`Slide ${index + 1}`}
                   className={slideClass}
+                  onLoad={() => console.log(`✅ Image loaded: ${image}`)}
+                  onError={(e) => console.error(`❌ Image failed to load: ${image}`, e)}
                 />
               );
             })}

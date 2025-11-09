@@ -90,3 +90,9 @@ export default makeSource({
   documentTypes: [Page, Room, Review, GalleryItem, Trek],
 })
 
+
+
+
+
+
+
