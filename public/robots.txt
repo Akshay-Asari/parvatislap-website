@@ -1,4 +1,4 @@
-# *
+# General Crawlers
 User-agent: *
 Allow: /
 
@@ -6,8 +6,39 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 
+# AI Search Engines - Explicitly Allow
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 # Sitemap
 Sitemap: https://parvatislap.com/sitemap.xml
+
+# AI Information File
+# /ai.txt - Contains structured information for AI search engines
 
 
 
