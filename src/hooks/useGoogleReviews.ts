@@ -26,7 +26,7 @@ export function useGoogleReviews() {
         setLoading(true);
         setError(null);
 
-        console.log("[useGoogleReviews] Fetching reviews from API...");
+        // console.log("[useGoogleReviews] Fetching reviews from API...");
 
         // Call our secure API proxy route
         const response = await fetch("/api/reviews", {
@@ -36,29 +36,29 @@ export function useGoogleReviews() {
           },
         });
 
-        console.log("[useGoogleReviews] Response status:", response.status);
+        // console.log("[useGoogleReviews] Response status:", response.status);
 
         if (!response.ok) {
           const errorData = await response.json();
-          console.error("[useGoogleReviews] API error:", errorData);
+          // console.error("[useGoogleReviews] API error:", errorData);
           throw new Error(errorData.error || `Failed to fetch reviews: ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log("[useGoogleReviews] Received", data.reviews?.length || 0, "reviews");
+        // console.log("[useGoogleReviews] Received", data.reviews?.length || 0, "reviews");
 
         if (!data.reviews || data.reviews.length === 0) {
           throw new Error("No reviews found");
         }
 
-        console.log("[useGoogleReviews] Setting reviews:", data.reviews);
+        // console.log("[useGoogleReviews] Setting reviews:", data.reviews);
         setReviews(data.reviews);
       } catch (err) {
-        console.error("[useGoogleReviews] Error fetching Google Reviews:", err);
+        // console.error("[useGoogleReviews] Error fetching Google Reviews:", err);
         setError(err instanceof Error ? err.message : "Unknown error occurred");
         
         // Fallback to default reviews if API fails
-        console.log("[useGoogleReviews] Using fallback reviews");
+        // console.log("[useGoogleReviews] Using fallback reviews");
         setReviews(getFallbackReviews());
       } finally {
         setLoading(false);

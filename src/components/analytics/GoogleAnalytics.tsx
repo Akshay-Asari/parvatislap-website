@@ -17,7 +17,7 @@ export function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
 
   // Don't render if no GA ID is provided
   if (!measurementId) {
-    console.warn("Google Analytics: No measurement ID provided");
+    // console.warn("Google Analytics: No measurement ID provided");
     return null;
   }
 

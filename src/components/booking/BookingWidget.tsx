@@ -37,7 +37,7 @@ export default function BookingWidget() {
     }
 
     // Console log for development/debugging
-    console.log("Booking widget clicked - redirecting to booking system");
+    // console.log("Booking widget clicked - redirecting to booking system");
   };
 
   /**
@@ -53,7 +53,7 @@ export default function BookingWidget() {
       });
     }
 
-    console.log("Booking form submitted - redirecting to booking system");
+    // console.log("Booking form submitted - redirecting to booking system");
   };
 
   return (

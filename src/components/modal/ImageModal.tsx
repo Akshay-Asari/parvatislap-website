@@ -24,7 +24,7 @@ interface ImageModalProps {
 
 export function ImageModal({ isOpen, images, mode, startIndex = 0, onClose }: ImageModalProps) {
   // Debug: Check what ImageModal receives
-  console.log('🖼️ ImageModal - Props:', { isOpen, images, mode, startIndex, imagesCount: images.length });
+  // console.log('🖼️ ImageModal - Props:', { isOpen, images, mode, startIndex, imagesCount: images.length });
   
   const carousel = useCarousel(images, 2500, startIndex);
 
@@ -53,16 +53,16 @@ export function ImageModal({ isOpen, images, mode, startIndex = 0, onClose }: Im
   }, [isOpen]);
 
   if (!isOpen || images.length === 0) {
-    console.log('🖼️ ImageModal - NOT rendering (closed or no images):', { isOpen, imagesCount: images.length });
+    // console.log('🖼️ ImageModal - NOT rendering (closed or no images):', { isOpen, imagesCount: images.length });
     return null;
   }
 
-  console.log('🖼️ ImageModal - RENDERING with active class:', { 
-    isOpen, 
-    mode, 
-    imagesCount: images.length,
-    currentSlide: carousel.currentSlide 
-  });
+  // console.log('🖼️ ImageModal - RENDERING with active class:', { 
+  //   isOpen, 
+  //   mode, 
+  //   imagesCount: images.length,
+  //   currentSlide: carousel.currentSlide 
+  // });
 
   return (
     <div
@@ -122,12 +122,12 @@ export function ImageModal({ isOpen, images, mode, startIndex = 0, onClose }: Im
               }
 
               // Debug: Log each image render
-              console.log(`🖼️ Rendering slide ${index}:`, {
-                src: image,
-                class: slideClass,
-                isActive: index === carousel.currentSlide,
-                currentSlide: carousel.currentSlide
-              });
+              // console.log(`🖼️ Rendering slide ${index}:`, {
+              //   src: image,
+              //   class: slideClass,
+              //   isActive: index === carousel.currentSlide,
+              //   currentSlide: carousel.currentSlide
+              // });
 
               return (
                 <img
@@ -135,8 +135,8 @@ export function ImageModal({ isOpen, images, mode, startIndex = 0, onClose }: Im
                   src={image}
                   alt={`Slide ${index + 1}`}
                   className={slideClass}
-                  onLoad={() => console.log(`✅ Image loaded: ${image}`)}
-                  onError={(e) => console.error(`❌ Image failed to load: ${image}`, e)}
+                  // onLoad={() => console.log(`✅ Image loaded: ${image}`)}
+                  // onError={(e) => console.error(`❌ Image failed to load: ${image}`, e)}
                 />
               );
             })}

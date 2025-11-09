@@ -113,7 +113,7 @@ export default function Accommodations() {
   const { isOpen, images, mode, startIndex, openCarousel, closeModal } = useImageModal();
 
   const handleCardClick = (accommodationImages: string[]) => {
-    console.log('🏠 Accommodations - Card clicked with images:', accommodationImages);
+    // console.log('🏠 Accommodations - Card clicked with images:', accommodationImages);
     openCarousel(accommodationImages, 0); // Always start from first image for accommodation cards
   };
 

@@ -33,12 +33,12 @@ export default function Views() {
   const [startIndex, setStartIndex] = useState(0);
 
   const handleImageClick = (images: string[], index: number) => {
-    console.log('🖼️ Views - Image clicked:', {
-      clickedIndex: index,
-      clickedImage: images[index],
-      allImages: images,
-      totalImages: images.length
-    });
+    // console.log('🖼️ Views - Image clicked:', {
+    //   clickedIndex: index,
+    //   clickedImage: images[index],
+    //   allImages: images,
+    //   totalImages: images.length
+    // });
     setModalImages(images);
     setStartIndex(index);
     setIsModalOpen(true);

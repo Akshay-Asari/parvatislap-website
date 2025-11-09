@@ -42,12 +42,12 @@ export function Gallery({
   const handleImageClick = (index: number) => {
     if (onImageClick) {
       const actualIndex = index % images.length;
-      console.log('🎯 Gallery - Image click:', {
-        clickedIndex: index,
-        actualIndex: actualIndex,
-        totalImages: images.length,
-        clickedImageUrl: images[actualIndex]
-      });
+      // console.log('🎯 Gallery - Image click:', {
+      //   clickedIndex: index,
+      //   actualIndex: actualIndex,
+      //   totalImages: images.length,
+      //   clickedImageUrl: images[actualIndex]
+      // });
       onImageClick(images, actualIndex);
     }
   };

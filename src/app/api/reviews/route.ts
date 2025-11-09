@@ -29,11 +29,11 @@ export async function GET() {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
     const placeId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID;
 
-    console.log("[API Route] API Key exists:", !!apiKey);
-    console.log("[API Route] Place ID:", placeId);
+    // console.log("[API Route] API Key exists:", !!apiKey);
+    // console.log("[API Route] Place ID:", placeId);
 
     if (!apiKey || !placeId) {
-      console.error("[API Route] Missing API key or Place ID");
+      // console.error("[API Route] Missing API key or Place ID");
       return NextResponse.json(
         { error: "API configuration missing" },
         { status: 500 }
@@ -49,8 +49,8 @@ export async function GET() {
       placeId
     )}?fields=${encodeURIComponent(fields)}&key=${apiKey}`;
 
-    console.log("[API Route] Calling Google Places API...");
-    console.log("[API Route] Endpoint:", endpoint.replace(apiKey, 'API_KEY_HIDDEN'));
+    // console.log("[API Route] Calling Google Places API...");
+    // console.log("[API Route] Endpoint:", endpoint.replace(apiKey, 'API_KEY_HIDDEN'));
 
     const response = await fetch(endpoint, {
       method: "GET",
@@ -61,11 +61,11 @@ export async function GET() {
       next: { revalidate: 3600 },
     });
 
-    console.log("[API Route] Response status:", response.status);
+    // console.log("[API Route] Response status:", response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("[API Route] Google Places API error:", errorText);
+      // console.error("[API Route] Google Places API error:", errorText);
       return NextResponse.json(
         { error: `Failed to fetch reviews from Google Places API: ${response.status} ${response.statusText}`, details: errorText },
         { status: response.status }
@@ -73,17 +73,17 @@ export async function GET() {
     }
 
     const data: GooglePlacesResponse = await response.json();
-    console.log("[API Route] Received data:", JSON.stringify(data, null, 2).substring(0, 500));
+    // console.log("[API Route] Received data:", JSON.stringify(data, null, 2).substring(0, 500));
 
     if (!data.reviews || data.reviews.length === 0) {
-      console.warn("[API Route] No reviews found in response");
+      // console.warn("[API Route] No reviews found in response");
       return NextResponse.json(
         { error: "No reviews found" },
         { status: 404 }
       );
     }
 
-    console.log("[API Route] Successfully fetched", data.reviews.length, "reviews");
+    // console.log("[API Route] Successfully fetched", data.reviews.length, "reviews");
 
     // Map Google Reviews to simplified format
     const reviews = data.reviews.map((review, index) => {
@@ -114,10 +114,10 @@ export async function GET() {
       };
     });
 
-    console.log("[API Route] Returning", reviews.length, "mapped reviews");
+    // console.log("[API Route] Returning", reviews.length, "mapped reviews");
     return NextResponse.json({ reviews }, { status: 200 });
   } catch (error) {
-    console.error("[API Route] Error in /api/reviews:", error);
+    // console.error("[API Route] Error in /api/reviews:", error);
     return NextResponse.json(
       { 
         error: "Internal server error",

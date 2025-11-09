@@ -12,9 +12,9 @@ import { useState, useEffect, useCallback, useRef } from "react";
  */
 export function useCarousel(images: string[], autoScrollDelay: number = 2500, initialSlide: number = 0) {
   // Debug: Check incoming images
-  console.log('🎠 useCarousel - Received images:', images);
-  console.log('🎠 useCarousel - Images count:', images.length);
-  console.log('🎠 useCarousel - Initial slide:', initialSlide);
+  // console.log('🎠 useCarousel - Received images:', images);
+  // console.log('🎠 useCarousel - Images count:', images.length);
+  // console.log('🎠 useCarousel - Initial slide:', initialSlide);
   
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
@@ -136,7 +136,7 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500, in
     // Reset to initialSlide or 0 if current slide is out of bounds
     const validInitialSlide = initialSlide < images.length ? initialSlide : 0;
     setCurrentSlide(validInitialSlide);
-    console.log('🎠 useCarousel - Resetting to slide:', validInitialSlide);
+    // console.log('🎠 useCarousel - Resetting to slide:', validInitialSlide);
   }
 
   /**
@@ -146,13 +146,13 @@ export function useCarousel(images: string[], autoScrollDelay: number = 2500, in
   const nextIndex = (currentSlide + 1) % images.length;
 
   // Debug: Log current carousel state
-  console.log('🎠 useCarousel - Current state:', {
-    currentSlide,
-    currentImage: images[currentSlide],
-    totalImages: images.length,
-    prevIndex,
-    nextIndex
-  });
+  // console.log('🎠 useCarousel - Current state:', {
+  //   currentSlide,
+  //   currentImage: images[currentSlide],
+  //   totalImages: images.length,
+  //   prevIndex,
+  //   nextIndex
+  // });
 
   return {
     currentSlide,

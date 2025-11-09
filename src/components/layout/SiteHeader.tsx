@@ -56,27 +56,27 @@ export function SiteHeader() {
         };
         
         // Console logging for deeper inspection
-        console.group('🐛 Navigation Debug Info');
-        console.log('Viewport Width:', info.width + 'px');
-        console.log('Actual Nav Height:', info.height + 'px');
-        console.log('Computed Height:', info.computedHeight);
-        console.log('All Classes:', allClasses);
-        console.log('Nav Element:', nav);
+        // console.group('🐛 Navigation Debug Info');
+        // console.log('Viewport Width:', info.width + 'px');
+        // console.log('Actual Nav Height:', info.height + 'px');
+        // console.log('Computed Height:', info.computedHeight);
+        // console.log('All Classes:', allClasses);
+        // console.log('Nav Element:', nav);
         
         // Check what styles are being applied
-        const allStyles = Array.from(document.styleSheets).flatMap(sheet => {
-          try {
-            return Array.from(sheet.cssRules || []);
-          } catch {
-            return [];
-          }
-        }).filter(rule => {
-          const styleRule = rule as CSSStyleRule;
-          return styleRule.selectorText && styleRule.selectorText.includes('site-nav');
-        });
+        // const allStyles = Array.from(document.styleSheets).flatMap(sheet => {
+        //   try {
+        //     return Array.from(sheet.cssRules || []);
+        //   } catch {
+        //     return [];
+        //   }
+        // }).filter(rule => {
+        //   const styleRule = rule as CSSStyleRule;
+        //   return styleRule.selectorText && styleRule.selectorText.includes('site-nav');
+        // });
         
-        console.log('Matching CSS Rules:', allStyles.map(r => r.cssText));
-        console.groupEnd();
+        // console.log('Matching CSS Rules:', allStyles.map(r => r.cssText));
+        // console.groupEnd();
         
         setDebugInfo(info);
       }
