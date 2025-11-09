@@ -2,7 +2,25 @@
 
 ## Complete These Steps in Order
 
-### 1. Push to GitHub (Complete This First!)
+### 1. Configure Git (First Time Setup)
+
+```bash
+# Set your Git username (replace with your name)
+git config --global user.name "Akshay Asari"
+
+# Set your Git email (use your GitHub email)
+git config --global user.email "your-email@example.com"
+
+# Verify configuration
+git config --global user.name
+git config --global user.email
+```
+
+> **Note:** Only needed once per computer. Skip if already configured.
+
+---
+
+### 2. Push to GitHub
 
 ```bash
 # Open PowerShell or Git Bash in your project folder
@@ -35,7 +53,7 @@ git push -u origin main
 
 ---
 
-### 2. Deploy to Vercel
+### 3. Deploy to Vercel
 
 **Option A: Vercel Dashboard (Easiest)**
 1. Go to: https://vercel.com/new
@@ -65,7 +83,7 @@ vercel --prod
 
 ---
 
-### 3. Verify AI Files Are Live
+### 4. Verify AI Files Are Live
 
 After deployment, check these URLs:
 ```
@@ -78,7 +96,7 @@ All should load without errors!
 
 ---
 
-### 4. Submit to Search Engines
+### 5. Submit to Search Engines
 
 **Google Search Console:**
 1. https://search.google.com/search-console
@@ -93,7 +111,7 @@ All should load without errors!
 
 ---
 
-### 5. Test AI Search (2 weeks after deployment)
+### 6. Test AI Search (2 weeks after deployment)
 
 **ChatGPT:**
 - Ask: "Where should I stay in Kasol for trekking?"

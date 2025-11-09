@@ -12,6 +12,24 @@ Before deploying, ensure you have:
 
 ## Step 1: Prepare Your Project for Git (If Not Already Done)
 
+### Configure Git (First Time Setup)
+
+If this is your first time using Git on this computer, configure your identity:
+
+```bash
+# Set your Git username
+git config --global user.name "Akshay Asari"
+
+# Set your Git email (use your GitHub email)
+git config --global user.email "your-email@example.com"
+
+# Verify configuration
+git config --global user.name
+git config --global user.email
+```
+
+> **Note:** This is only needed once per computer. The `--global` flag applies these settings to all your Git projects.
+
 ### Initialize Git Repository
 
 ```bash
@@ -266,6 +284,27 @@ npm run build
 - Check that all image paths in the code match actual files
 - Verify image formats (JPEG, PNG, WebP)
 - Ensure images are in `/public/images/` folder
+
+### Git Push Fails
+
+**Error: "Please tell me who you are"**
+```bash
+# Configure your Git identity
+git config --global user.name "Akshay Asari"
+git config --global user.email "your-email@example.com"
+
+# Try push again
+git push -u origin main
+```
+
+**Error: "Authentication failed" or "Permission denied"**
+- Make sure you're using a Personal Access Token (not password)
+- Get token from: https://github.com/settings/tokens
+- Use token as password when prompted
+
+**Alternative: Use GitHub Desktop**
+- Download: https://desktop.github.com
+- Easier authentication without command line
 
 ### Images Not Loading
 
