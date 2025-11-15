@@ -56,7 +56,7 @@ export function SiteHeader() {
           computedHeight: computed.height
         };
         
-        // Console logging for deeper inspection
+        // // Console logging for deeper inspection
         // console.group('🐛 Navigation Debug Info');
         // console.log('Viewport Width:', info.width + 'px');
         // console.log('Actual Nav Height:', info.height + 'px');
@@ -64,7 +64,7 @@ export function SiteHeader() {
         // console.log('All Classes:', allClasses);
         // console.log('Nav Element:', nav);
         
-        // Check what styles are being applied
+        // // Check what styles are being applied
         // const allStyles = Array.from(document.styleSheets).flatMap(sheet => {
         //   try {
         //     return Array.from(sheet.cssRules || []);

@@ -135,7 +135,7 @@ export default function Accommodations() {
                 className="bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)] border-2 border-[var(--border-color)] rounded-[20px] overflow-hidden transition-all duration-300 shadow-[0_10px_30px_rgba(128,128,0,0.15)] cursor-pointer hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(128,128,0,0.25)] dark:bg-gradient-to-br dark:from-[rgba(0,0,0,0.8)] dark:to-[rgba(57,255,20,0.05)] dark:border-[rgba(57,255,20,0.2)] dark:shadow-[0_10px_30px_rgba(57,255,20,0.15)] dark:hover:shadow-[0_20px_40px_rgba(57,255,20,0.25)]"
                 onClick={() => handleCardClick(accommodation.images)}
               >
-                <div className="relative overflow-hidden [@media(min-width:2560px)]:h-[26rem]">
+                <div className="relative overflow-hidden h-[216px] [@media(min-width:2560px)]:h-[26rem]">
                   <Image
                     src={accommodation.mainImage}
                     alt={accommodation.title}

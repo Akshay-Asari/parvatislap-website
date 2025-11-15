@@ -59,9 +59,9 @@ export default function BookingWidget() {
   return (
     <div
       id="booking-widget"
-      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:left-auto lg:right-[-41px] [@media(min-width:2560px)]:right-[-152px] lg:transform-none w-11/12 ${
+      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 xl:left-auto xl:right-4 [@media(min-width:2560px)]:right-[-152px] xl:transform-none w-11/12 ${
         isCollapsed ? "max-w-[12rem]" : ""
-      } lg:w-85 rounded-3xl [@media(min-width:1536px)]:rounded-[5rem] z-40 overflow-hidden transition-all duration-300 shadow-2xl booking-glass [@media(min-width:2560px)]:max-w-[33rem] [@media(min-width:2560px)]:w-[33rem]`}
+      } xl:w-85 rounded-3xl [@media(min-width:1536px)]:rounded-[5rem] z-40 overflow-hidden transition-all duration-300 shadow-2xl booking-glass [@media(min-width:2560px)]:max-w-[33rem] [@media(min-width:2560px)]:w-[33rem]`}
     >
       {/* Header - Always Visible */}
       <div

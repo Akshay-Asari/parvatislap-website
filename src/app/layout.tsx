@@ -1,10 +1,28 @@
 import type { Metadata } from "next";
+import { Poppins, Inter } from "next/font/google";
 import "../../styles/globals.css";
 import { ClientLayout } from "@/components/layout/ClientLayout";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { generateMetadata, generateOrganizationSchema } from "@/lib/seo";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { generateReviewSchema } from "@/data/reviews";
+
+/**
+ * Font configurations using next/font for optimal loading
+ */
+const poppins = Poppins({
+  weight: ["400", "600", "700", "800"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+const inter = Inter({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 /**
  * Root metadata for SEO
@@ -25,16 +43,8 @@ export default function RootLayout({
   const reviewSchema = generateReviewSchema();
 
   return (
-    <html lang="en" className="theme-light">
+    <html lang="en" className={`theme-light ${poppins.variable} ${inter.variable}`}>
       <head>
-        {/* Google Fonts - Poppins & Inter */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" 
-          rel="stylesheet" 
-        />
-        
         {/* Organization Structured Data */}
         <StructuredData data={organizationSchema} />
         

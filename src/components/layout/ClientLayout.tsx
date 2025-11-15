@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
 import { PageLoader } from "@/components/loader/PageLoader";
+import { ScreenResolutionDebug } from "@/components/debug/ScreenResolutionDebug"; // 🔴 DEBUG - Remove before production
 
 /**
  * ClientLayout Component
@@ -18,6 +19,12 @@ export function ClientLayout({ children }: { children: ReactNode }) {
       <SiteHeader />
       <main>{children}</main>
       <SiteFooter />
+      
+      {/* ==========================================
+          🔴 DEBUG TOOL - SCREEN RESOLUTION DISPLAY
+          Remove this line before production deployment
+          ========================================== */}
+      <ScreenResolutionDebug />
     </ThemeProvider>
   );
 }
